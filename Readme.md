@@ -33,13 +33,74 @@ python excel2javascript.py [path_to_excel_file] [options]
 - `-d, --show-dependencies [CELL]`: Show the dependency tree of a specific cell or of all cells if no cell is specified.
 - `-s, --show-dependants [CELL]`: Display the direct dependants of a specific cell.
 
-## Example
+## Examples
+
+### Compute the value of a specific cell:
+
+```bash
+python excel2javascript.py sample.xlsx -c A1
+```
+
+Output:
+
+```
+The computed value of A1 is 123.45
+```
+
+### Display the original formula or numeric value of a specified cell:
+
+```bash
+python excel2javascript.py sample.xlsx -f A1
+```
+
+Output:
+
+```
+The original formula/value of A1 is =B1+C1
+```
+
+### Save the generated JavaScript to a specified file:
+
+```bash
+python excel2javascript.py sample.xlsx -o output.js
+```
+
+Output:
+
+```
+Testing JavaScript for errors...
+No errors detected.
+Saved JavaScript to output.js
+```
+
+### Show the dependency tree of a specific cell:
 
 ```bash
 python excel2javascript.py sample.xlsx -d A1
 ```
 
-This will display the dependency tree for cell A1 from the `sample.xlsx` spreadsheet.
+Output:
+
+```
+A1 (=B1+C1 => 123.45)
+├── B1 (45)
+└── C1 (78.45)
+```
+
+### Display the direct dependants of a specific cell:
+
+```bash
+python excel2javascript.py sample.xlsx -s A1
+```
+
+Output:
+
+```
+A1 (=B1+C1 => 123.45)
+└── D1 (=A1*2 => 246.9)
+```
+
+---
 
 ## Notes
 
